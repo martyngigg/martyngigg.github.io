@@ -245,3 +245,15 @@ a {
 .cf {
   zoom:1;
 }
+
+/* Icons */
+icon > svg {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+}
+
+.icon > svg path {
+    fill: #828282;
+}
