@@ -1,13 +1,12 @@
 # Site settings
-title: Coder, Singer, Tea Drinker
+title: Powered By Tea
 description: >
   Random stuff (probably mostly code related)
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://yourdomain.com" # the base hostname & protocol for your site
 twitter_username: martyngigg
 github_username:  martyngigg
 encoding: utf-8
 timezone: Europe/London
 
 # Build settings
-markdown: kramdown
+markdown: rdiscount
+highlighter: pygments
