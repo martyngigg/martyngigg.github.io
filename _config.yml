@@ -1,5 +1,5 @@
 # Site settings
-title: Powered By Tea
+title: powered by tea
 description: >
   Random stuff (probably mostly code related)
 twitter_username: martyngigg
@@ -8,5 +8,7 @@ encoding: utf-8
 timezone: Europe/London
 
 # Build settings
-markdown: rdiscount
+markdown: redcarpet
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "strikethrough", "superscript","tables", "with_toc_data"]
 highlighter: pygments
