@@ -1,0 +1,28 @@
+---
+layout: post
+title:  "C++11"
+date:   2015-09-25 19:25:01
+categories: c++
+---
+
+This post was primarily written to review new C+11 with the Mantid team but contains no Mantid-specific code.
+
+C++11 will feel like a new language in many aspects. New features include:
+
+* `auto`
+* r-value references and move constructors
+* lambdas
+* range-based for loops
+* initializer lists for containers and POD structs
+* tuple
+* smart pointers - `shared_ptr`, `unique_ptr`, `scoped_ptr`
+
+auto
+----
+
+auto takes the place of a hand-written type and forces the compiler to fill in the details:
+
+```c++
+std::vector<int> indexes(1);
+auto n = indexes.size();
+```
