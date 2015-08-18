@@ -5,17 +5,24 @@ date:   2015-09-25 19:25:01
 categories: c++
 ---
 
-This post was primarily written to review new C+11 with the Mantid team but contains no Mantid-specific code.
+This post was primarily written to review new C+11 with the Mantid team but contains no Mantid-specific code. It was adapted from [these slides](https://isocpp.org/blog/2012/12/c11-a-cheat-sheet-alex-sinyakov) by Alex Sinyakov.
 
-C++11 will feel like a new language in many aspects. New features include:
+C++11 will feel like a new language in many aspects. New language features include:
 
 * `auto`
-* r-value references and move constructors
-* lambdas
+* `nullptr` constant
+* raw string literals
 * range-based for loops
-* initializer lists for containers and POD structs
-* tuple
+* lambdas
+* initializer lists for POD structs
+* delegating constructors
+* r-value references and move constructors
+
+New standard library features include:
+
 * smart pointers - `shared_ptr`, `unique_ptr`, `scoped_ptr`
+* tuple
+* initializer lists for containers
 
 auto
 ----
