@@ -72,3 +72,33 @@ const auto & rx = foo(); // type of cx is const int &
 ```
 
 Notice that even though the function returns a `const int &`, the `auto` specifier does not automatically acquire these properties. The qualifiers must be applied to the variable definition too. This is especially important to keep in mind when the returning value may be expensive to copy - remember to consider whether you want your variable to be a reference or value type.
+
+nullptr
+-------
+
+The best that C++03 had to offer for initialising a null pointer was `NULL`. This had many problems, which all revolve around the fact that `NULL` is really just
+
+```c++
+#define NULL 0
+```
+
+The fact that `NULL` is actually an integer can lead to problems with overload resolution:
+
+```c++
+void foo(const char*); //(a)
+void foo(int); //(b)
+
+
+foo(NULL); // you want (a) but you get (b)
+```
+
+This has been rectified in C++11 with the introduction of `nullptr`. It has type conversions to any pointer
+type so is safe to use in initialization of any pointer value.
+
+```c++
+void foo(const char*); //(a)
+void foo(int); //(b)
+
+
+foo(nullptr); // now does what we want!
+```
