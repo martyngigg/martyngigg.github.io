@@ -56,39 +56,19 @@ Take home message: Use `auto` as much as you can!
 
 ### auto type deduction
 
-It is worth taking a moment to review the rules that are applied when trying to deduce a type with `auto`. The compiler actually
-uses (nearly) the same rules for deducing a type via `auto` as when it deduces a type via template-type deduction. Consider some
-pseudocode:
+At first glance `auto` seems like a pretty simple beast - it would seem that the type of the `auto` variable is
+the same as the type of the initializing expression. However, that is not always the case due to the possibility of
+expressions possessing qualifiers such as `const`, `&` or `*`.
+
+Consider these examples:
 
 ```c++
-template <typename T>
-void foo(ParamType x); // definition
+// function returing a reference to a const integer
+const int & foo();
 
-foo(expr);
+auto x = foo(); // type of x is int
+const auto cx = foo(); // type of cx is const int
+const auto & rx = foo(); // type of cx is const int &
 ```
 
-where `ParamType` is the deduced type for `x` and `T` takes the place of `auto`, i.e we are trying to figure out what the compiler will
-compute `T` to be given a variety of arguments. There are essentailly two situations that we should consider:
-
-* **`ParamType` is a reference or pointer type** - ignore reference qualifiers on `expr`  and match `expr`'s type to `ParamType`, e.g.
-
-```c++
-int x = 42;
-const int cx = x;
-const int &rx = x;
-
-auto a_x = x; // T is deduced to be a int
-auto a_cx = cs; // T is deduced to be a const int
-auto a_rx = rx; // T is deduced to be a const int
-```
-
-* **`ParamType` is neither a pointer nor a reference type** - ignore reference and `const` qualifiers on `expr` and then match, e.g
-
-```c++
-int x = 42;
-const int cx = x;
-const int &rx = x;
-
-auto a_x = x; // T is deduced to be a int
-const auto a_cx = cs; // T is deduced to be an int
-const auto & a_rx = rx; // T is deduced to be an int
+Notice that even though the function returns a `const int &`, the `auto` specifier does not automatically acquire these properties. The qualifiers must be applied to the variable definition too. This is especially important to keep in mind when the returning value may be expensive to copy - remember to consider whether you want your variable to be a reference or value type.
