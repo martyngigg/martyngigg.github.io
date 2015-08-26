@@ -27,9 +27,68 @@ New standard library features include:
 auto
 ----
 
-auto takes the place of a hand-written type and forces the compiler to fill in the details:
+The `auto` keyword takes the place of a hand-written type and forces the compiler to fill in the details:
 
 ```c++
 std::vector<int> indexes(1);
 auto n = indexes.size();
+// vs in C++03
+std::vector<int>::size_t n2 = indexes.size();
 ```
+
+Leaning on the compiler in this manner allows us to be confident that the correct type is being used and not rely
+on warnings for invalid type conversions that might not always be emitted. Other advantages of using `auto` include:
+
+* removes duplication of type name e.g.
+
+```c++
+auto workspace = data_service.retrieve<WorkspaceType>("foo");
+```
+* allows lambdas (see later) to be captured into a variable without having to write a hideous function pointer type
+* requires a variable to be initialised at the point of definition, e.g.
+
+```c++
+auto workspace; // ERROR - impossible to deduce type
+auto workspace = Workspace2D(); //
+```
+
+Take home message: Use `auto` as much as you can!
+
+### auto type deduction
+
+It is worth taking a moment to review the rules that are applied when trying to deduce a type with `auto`. The compiler actually
+uses (nearly) the same rules for deducing a type via `auto` as when it deduces a type via template-type deduction. Consider some
+pseudocode:
+
+```c++
+template <typename T>
+void foo(ParamType x); // definition
+
+foo(expr);
+```
+
+where `ParamType` is the deduced type for `x` and `T` takes the place of `auto`, i.e we are trying to figure out what the compiler will
+compute `T` to be given a variety of arguments. There are essentailly two situations that we should consider:
+
+* **`ParamType` is a reference or pointer type** - ignore reference qualifiers on `expr`  and match `expr`'s type to `ParamType`, e.g.
+
+```c++
+int x = 42;
+const int cx = x;
+const int &rx = x;
+
+auto a_x = x; // T is deduced to be a int
+auto a_cx = cs; // T is deduced to be a const int
+auto a_rx = rx; // T is deduced to be a const int
+```
+
+* **`ParamType` is neither a pointer nor a reference type** - ignore reference and `const` qualifiers on `expr` and then match, e.g
+
+```c++
+int x = 42;
+const int cx = x;
+const int &rx = x;
+
+auto a_x = x; // T is deduced to be a int
+const auto a_cx = cs; // T is deduced to be an int
+const auto & a_rx = rx; // T is deduced to be an int
