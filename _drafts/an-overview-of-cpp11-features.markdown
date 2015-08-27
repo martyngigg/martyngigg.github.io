@@ -138,3 +138,33 @@ for(auto &value : values) {
 
 Similarly, if you want a non-modifiable reference to the element then specify the type
 as `const auto &`.
+
+initializer lists
+-----------------
+
+Let's say you're writing a test and you need to initialize a `vector` with a list of
+different values. In C++03 this was more painful than it should be and in many
+circumstances adds to the usage of plain C arrays that have nice syntax for initializing
+from a fixed set of values. You could also have opted to use a library such as
+[`boost::assign`](doc/libs/1_59_0/libs/assign/doc/index.html).
+
+The future is now brighter with the advent of `std::initializer_list` and *uniform initialization* where we can now do:
+
+```c++
+int a[] = {1,2,3,4,5};
+std::vector<int> v{1,2,3,4,5};
+```
+
+The brace-initialization syntax can also be nested, which is useful for associative
+containers:
+
+```c++
+map<int, string> states{
+  {1, "Off"},
+  {2, "On"}
+};
+```
+
+As will always be the case the types specified in the container must be constructable
+from each element in the brace initializer. Furthermore any class type that has a
+constructor that accepts a `std::initializer_list` argument can take advantage of this type of syntax.
