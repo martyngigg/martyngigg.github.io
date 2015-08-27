@@ -10,14 +10,14 @@ C++11 will feel like a new language in many aspects. New language features inclu
 
 * `auto`
 * `nullptr` constant
-* raw string literals
 * range-based for loops
+* initializer lists
 * lambdas
-* initializer lists for POD structs
 * delegating constructors
 * r-value references and move constructors
+* + lots more!
 
-New standard library features include:
+Some new standard library features include:
 
 * smart pointers - `shared_ptr`, `unique_ptr`, `scoped_ptr`
 * tuple
@@ -87,7 +87,6 @@ The fact that `NULL` is actually an integer can lead to problems with overload r
 void foo(const char*); //(a)
 void foo(int); //(b)
 
-
 foo(NULL); // you want (a) but you get (b)
 ```
 
@@ -98,6 +97,44 @@ type so is safe to use in initialization of any pointer value.
 void foo(const char*); //(a)
 void foo(int); //(b)
 
-
 foo(nullptr); // now does what we want!
 ```
+
+Range-based for loops
+---------------------
+
+Iterating around containers in C++03 required a lot of typing:
+
+```c++
+vector<int> v(5, 10);
+for(vector<int>::iterator itr = v.begin();
+    itr != v.end(); ++itr) {
+  cout << "Value=" << *itr << std::endl;
+}
+```
+
+The future in C++11 and beyond is far cleaner:
+
+```c++
+vector<int> values(5, 10);
+for(auto value : values) {
+  cout << "Value=" << value << std::endl;
+}
+```
+
+Here `auto` is combined with a new syntax to for specifying the range. The type of
+the loop variable `value` is the same as the element type of the container. In this
+case the loop variable is neither a reference or a pointer so the values in the
+container cannot be changed. To access a reference to an element then simply specify
+that with your type:
+
+```c++
+vector<int> values(5, 10);
+for(auto &value : values) {
+  value += 1;
+  cout << "Value=" << value << std::endl;
+}
+```
+
+Similarly, if you want a non-modifiable reference to the element then specify the type
+as `const auto &`.
