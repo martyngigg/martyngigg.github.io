@@ -7,6 +7,9 @@ github_username:  martyngigg
 encoding: utf-8
 timezone: Europe/London
 
+# Output
+permalink: none
+
 # Build settings
 markdown: redcarpet
 redcarpet:
