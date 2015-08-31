@@ -23,16 +23,16 @@ Some new standard library features include:
 * tuple
 * initializer lists for containers
 
-auto
+Auto
 ----
 
 The `auto` keyword takes the place of a hand-written type and forces the compiler to fill in the details:
 
 ```c++
 std::vector<int> indexes(1);
-auto n = indexes.size();
+auto cend = cend(indexes);
 // vs in C++03
-std::vector<int>::size_t n2 = indexes.size();
+std::vector<int>::const_iterator cend03 = indexes.end();
 ```
 
 Leaning on the compiler in this manner allows us to be confident that the correct type is being used and not rely
@@ -53,7 +53,7 @@ auto workspace = Workspace2D(); //
 
 Take home message: Use `auto` as much as you can!
 
-### auto type deduction
+### Auto type deduction
 
 At first glance `auto` seems like a pretty simple beast - it would seem that the type of the `auto` variable is
 the same as the type of the initializing expression. However, that is not always the case due to the possibility of
@@ -139,7 +139,7 @@ for(auto &value : values) {
 Similarly, if you want a non-modifiable reference to the element then specify the type
 as `const auto &`.
 
-initializer lists
+Initializer lists
 -----------------
 
 Let's say you're writing a test and you need to initialize a `vector` with a list of
@@ -166,5 +166,94 @@ map<int, string> states{
 ```
 
 As will always be the case the types specified in the container must be constructable
-from each element in the brace initializer. Furthermore any class type that has a
+from each element in the brace initializer. Furthermore, any class type that has a
 constructor that accepts a `std::initializer_list` argument can take advantage of this type of syntax.
+
+Lambdas
+-------
+
+As with many things in C++11 lambdas don't techincally offer you anything above
+what was possible with C++03. They do however offer much cleaner and more concise syntax
+for defining unnamed function objects that can capture variables in the current scope
+(basically they are [closures](https://en.wikipedia.org/wiki/Closure_(computer_programming))).
+
+
+Take, for example, the case where you wish to apply a transformation to a sequence of data using
+an STL algorithm but the transformation is not something covered by a basic mathematical function
+such as `sqrt`. In C++03 this requires a custom `struct`:
+
+```c++
+// ------------------- C++03 --------------------
+struct _trans {
+  _trans(const double scale) : m_scale(scale) {}
+  double operator()(double x) const { return m_scale *sqrt(x) / M_PI; };
+  double m_scale;
+};
+
+using boost::assign::list_of;
+std::vector<double> v = list_of(1.0)(2.0)(3.0)(4.0)(5.0);
+const double scale = scaleFactor();
+std::transform(v.begin(), v.end(), v.begin(), _trans(scale));
+```
+
+Lambdas allow us to drastically reduce the amount of code required to do the same thing:
+
+```c++
+// ------------------- C++11 --------------------
+std::vector<double> v{1.0, 2.0, 3.0, 4.0, 5.0};
+const double scale = scaleFactor();
+std::transform(begin(v), end(v), begin(v),
+                 [scale](const double &x) { return scale *sqrt(x) / M_PI; });
+```
+
+Internally the compiler actually generates an anonymous `struct` that does exactly what we would
+have written ourselves but leaning on the compiler allows us to reduce the amount of
+code we have to maintain and avoid bugs.
+
+### Lambda capture
+
+In the example above the definition of the lambda looks mostly like a regular function definition
+with the name replaced by the square bracket notation - this bracket notation is called the *capture*.
+It allows the generated struct to reference the environment that it is defined in.
+
+The following scenarios define what can be captured:
+
+* `[a,&b]` where `a` is captured by value and `b` is captured by reference.
+* `[this]` captures the `this` pointer by value
+* `[&]` captures all *automatic* variables in the body of the lambda by reference
+* `[=]` captures all *automatic* variables in the body of the lambda by value
+* `[]` captures nothing
+
+One of Scott Mayers' tips is to avoid the two "capture all" scenarios and implicitly specify the required
+variables to limit the scope that the lambda has to affect its environment.
+
+Delegating constructors
+-----------------------
+
+Writing a class with multiple constructors often requires them to share common setup code such as defining
+member variables. This is generally done by writing a separate private member function to handle the
+setup without repeating code. While the private method eliminates the duplicate code it has other problems:
+
+* other member functions might accidentally call `init()`, which causes unexpected results.
+* after we enter a class member function,  all the class members have already been constructed. It's too
+  late to call member functions to do the construction work of class members.
+
+C++11 introduces the concept of *delegating constructors* where a single constructor takes ultimate responsibility
+for initializing the object and other constructors can call this construtor:
+
+```c++
+class A{
+public:
+  A(): A(0){}
+  A(double i): A(i, 0){}
+  A(double i, double j) {
+    num1 = i;
+    num2 = j;
+    average = 0.5*(num1+num2);
+   }
+private:
+  double num1;
+  double num2;
+  double average;
+};
+```
