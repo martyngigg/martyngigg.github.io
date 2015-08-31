@@ -16,7 +16,7 @@ body {
 	text-align: center;
 	margin: 0em;
 	background-color: #ffffff;
-    font-family: Athelas, Palatino, Georgia, serif;
+	font-family: Athelas, Palatino, Georgia, serif;
 	font-size: 16px;
 	font-style: normal;
 	font-variant: normal;
@@ -27,33 +27,32 @@ body {
 /*--------------------------------------------------------------
  Site defaults
  --------------------------------------------------------------*/
-
 h1 {
-	font-size: 2.3em;
+	font-size: 1.8em;
 }
 
 h2 {
-	font-size: 1.7em;
+	font-size: 1.35em;
 }
 
 h3 {
-	font-size: 1.25em;
+	font-size: 1.15em;
 }
 
 a {
 	color: #00a;
 	text-decoration: none;
-	font: normal;
+	font-style: normal;
 }
 
 a:hover {
 	color: #000000;
-	font: bold;
+	font-style: bold;
 }
 
 a:visited {
 	color: #a0a;
-	font: normal;
+	font-style: normal;
 }
 
 table {
@@ -92,7 +91,7 @@ pre {
 #container {
 	font-size: 1.0em;
 	text-align: left;
-	padding: 1em 2.5em;
+	padding: 0em 2.5em;
 	margin: 2em auto 2em auto;
 	line-height: 1.5em;
 	width: 720px;
@@ -116,13 +115,18 @@ pre {
 
 #masthead h1 {
 	color: #a00;
-	font-size: 2.0em;
+	font-size: 2.3em;
 }
 
 #masthead h1 a:link,
 #masthead h1 a:visited {
 	color: #a00;
 }
+
+#masthead h2 {
+	font-size: 1.0em;
+}
+
 
 /*--------------------------------------------------------------
  Navbar
