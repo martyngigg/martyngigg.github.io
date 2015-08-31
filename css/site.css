@@ -40,19 +40,13 @@ h3 {
 }
 
 a {
-	color: #00a;
+	color: #0000aa;
 	text-decoration: none;
 	font-style: normal;
 }
 
 a:hover {
-	color: #000000;
-	font-style: bold;
-}
-
-a:visited {
-	color: #a0a;
-	font-style: normal;
+	color: #4c4cc3;
 }
 
 table {
