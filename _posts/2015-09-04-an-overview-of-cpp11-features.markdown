@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "An overview of C++11 features"
-date:   2015-09-25 19:25:01
+date:   2015-09-04 22:45:01
 ---
 
 This post was primarily written to review new C+11 with the Mantid team but contains no Mantid-specific code. It was adapted from [these slides](https://isocpp.org/blog/2012/12/c11-a-cheat-sheet-alex-sinyakov) by Alex Sinyakov.
