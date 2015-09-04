@@ -1,0 +1,13 @@
+---
+layout: post
+title:  "BB-8 is real!"
+date:   2015-09-04 19:18
+categories: general
+---
+
+It's here! Now we can all own our own tiny bluetooth-controlled [BB-8][guardian] droid as seen in the first trailer for [Star Wars: The Force Awakens][trailer-1].
+
+Definitely one for the Christmas lists!
+
+[guardian]: http://www.theguardian.com/technology/2015/sep/03/star-wars-droid-bb-8-is-real-you-can-take-him-home-sphero-disney
+[trailer-1]: https://www.youtube.com/watch?v=erLk59H86ww

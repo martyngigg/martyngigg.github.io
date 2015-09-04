@@ -1,8 +1,0 @@
----
-layout: post
-title:  "Welcome"
-date:   2015-08-14 19:18
-categories: general
----
-
-I intend to use this mostly as a place to post random stuff that interests me, mostly coding related I expect!
