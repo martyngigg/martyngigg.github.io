@@ -159,7 +159,7 @@ footer {
 	overflow: hidden;
 	clear: both;
 	text-align: left;
-	padding: 1em 0em 1em 0em;
+	padding: 0em 0em 1em 0em;
 	line-height: 0.5em;
 }
 
@@ -270,10 +270,6 @@ article .video-note {
  Header
  --------------------------------------------------------------*/
 
-header {
-    padding: 1em 0em 1em 0em;
-}
-
 header .dateline {
 	font-size: 1.0em;
 	color: #aaa;
@@ -289,6 +285,10 @@ header h1 {
 /*--------------------------------------------------------------
  Archive
  --------------------------------------------------------------*/
+
+#archive_link {
+    padding-top: 0.7em;
+}
 
 #archive {
     border-bottom: 1px solid #ddd;

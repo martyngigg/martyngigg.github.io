@@ -6,13 +6,13 @@ title: index
 {% for post in site.posts limit:3 %}
   <article id="{{ post.id }}">
   {% include postheader.html %}
-  <div class='article_body'>
+  <div class="article_body">
     {{ post.excerpt }}
     <a href="{{ post.url }}">Read more</a>
   </div>
 </article>
 {% endfor %}
 
-<h2>
-<a href="/archive.html">Archive</a>
-</h2>
+<div id="archive_link">
+  <h2><a href="/archive.html">Archive</a></h2>
+</div>
