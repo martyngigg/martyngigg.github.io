@@ -2,14 +2,15 @@
  Syntax Highlighting - derived from GitHub style
  Original version http://github.com/mojombo/tpw
  --------------------------------------------------------------*/
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
 
 .highlight  {
 	background: #ffffff;
 }
 
-.highlight pre { 
-	font-size: 0.9em; 
-	font-family: Menlo, Monaco, Consolas, monospace;
+.highlight pre {
+	font-size: 0.9em;
+	font-family: 'Inconsolata', 'monospace';
 }
 
 .highlight .c { color: #999988; font-style: italic } /* Comment */

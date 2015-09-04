@@ -11,22 +11,27 @@
  *       details
  *   footer
  */
+@import url(//fonts.googleapis.com/css?family=Roboto+Slab:300);
 
 body {
 	text-align: center;
 	margin: 0em;
 	background-color: #ffffff;
-	font-family: Athelas, Palatino, Georgia, serif;
-	font-size: 16px;
+	font-family: 'Roboto Slab', 'serif';
+	font-size: 15px;
 	font-style: normal;
 	font-variant: normal;
-	font-weight: normal;
+	font-weight: 300;
 	min-width: 760px;
 }
 
 /*--------------------------------------------------------------
  Site defaults
  --------------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6 {
+  color: #a00;
+}
+
 h1 {
 	font-size: 1.7em;
 }
@@ -47,6 +52,14 @@ a {
 
 a:hover {
 	color: #4c4cc3;
+}
+
+header h1 > a, #archive_link h2 > a {
+        color: #a00;
+}
+
+header h1 > a:hover, #archive_link h2 > a:hover {
+        color: #c34c4c;
 }
 
 table {
@@ -118,6 +131,7 @@ pre {
 }
 
 #masthead h2 {
+        color: #aaa;
 	font-size: 1.0em;
 }
 
@@ -281,6 +295,12 @@ header h1 {
     margin: 0;
     padding: 1em 0 0.5em 0;
 }
+
+/* header h1, div.article_body h2, div.article_body h3, */
+/* div.article_body h4, div.article_body h5, */
+/* div.article_body h6 { */
+/*     color: #a00; */
+/* } */
 
 /*--------------------------------------------------------------
  Archive
