@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>
+	    {% if page.title == 'index' %}
+	        {{ site.title }}
+	    {% else %}
+        	{{page.title}}  &middot;  {{ site.title }}
+        {% endif %}
+	</title>
+	<meta name="author" content="Martyn Gigg">
+	<link rel="stylesheet" href="/css/site.css" type="text/css" media="screen, projection" />
+	<link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+	<meta name="viewport" content="width=850" />
+	<link rel="stylesheet" media="screen and (max-device-width: 480px)" href="/css/iphone.css" type="text/css" />
+</head>
+<body>
+<section id="container">
+    {% include masthead.html %}
+    <section id="content">
+        {{ content }}
+    </section>
+    {% include footer.html %}
+</div>
+</body>
+</html>

@@ -1,1 +1,3 @@
-Code for http://martyngigg.github.io
+Source for http://martyngigg.github.io.
+
+Uses [Jekyll](jekyllrb.com)
